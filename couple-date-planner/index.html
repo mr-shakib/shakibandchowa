@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story 💕 - Date Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <!-- Welcome Screen (July 3rd Special) -->
+    <div id="friendshipDayPage" class="page hidden">
+        <div class="welcome-container">
+            <div class="floating-elements">
+                <div class="float-element element-1"><i class="fas fa-heart"></i></div>
+                <div class="float-element element-2"><i class="fas fa-star"></i></div>
+                <div class="float-element element-3">✨</div>
+                <div class="float-element element-4"><i class="fas fa-heart"></i></div>
+                <div class="float-element element-5">🌟</div>
+                <div class="float-element element-6"><i class="fas fa-moon"></i></div>
+            </div>
+            
+            <div class="welcome-content">
+                <div class="welcome-header">
+                    <div class="welcome-logo">
+                        <i class="fas fa-heart-circle-bolt"></i>
+                    </div>
+                    <h1 class="welcome-title">Our <span>Special</span> Journey</h1>
+                </div>
+                
+                <div class="welcome-illustration">
+                    <div class="illustration-item couple-item">
+                        <div class="couple-emoji">👫</div>
+                        <div class="couple-shadow"></div>
+                    </div>
+                    <div class="connection-line"></div>
+                    <div class="illustration-item heart-item">
+                        <div class="heart-pulse">💖</div>
+                    </div>
+                    <div class="connection-line"></div>
+                    <div class="illustration-item calendar-item">
+                        <div class="calendar-emoji">📆</div>
+                        <div class="calendar-shadow"></div>
+                    </div>
+                </div>
+                
+                <div class="welcome-message">
+                    <p>Today and every day, let's celebrate the love that keeps us going. Plan your next perfect date and create memories that will last forever.</p>
+                    <p class="highlight-message">Happy Anniversary Month! ✨ Let's make it unforgettable.</p>
+                </div>
+                
+                <button id="enterDashboard" class="enter-btn">
+                    <span class="btn-text">Begin Our Journey</span>
+                    <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                </button>
+            </div>
+            
+            <div class="welcome-decoration">
+                <div class="decoration-circle circle-1"></div>
+                <div class="decoration-circle circle-2"></div>
+                <div class="decoration-circle circle-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboard" class="page hidden">
+        <header class="dashboard-header">
+            <h1>Our Love Dashboard 💖</h1>
+            <p class="subtitle">Where our hearts meet digitally ✨</p>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- Upcoming Date Countdown -->
+            <div class="card countdown-card" id="countdownCard">
+                <div class="card-header">
+                    <i class="fas fa-heart-pulse"></i>
+                    <h3>Next Date Countdown 💞</h3>
+                </div>
+                <div id="countdownContent" class="countdown-content">
+                    <p class="no-dates">No upcoming dates planned 🥺</p>
+                    <p class="plan-suggestion">Let's plan something romantic! 💕</p>
+                </div>
+            </div>
+
+            <!-- Plan New Date -->
+            <div class="card plan-card" id="planCard">
+                <div class="card-header">
+                    <i class="fas fa-calendar-plus"></i>
+                    <h3>Plan a New Date 🗓️</h3>
+                </div>
+                <div class="card-content">
+                    <p>Create magical moments together ✨</p>
+                    <button class="card-btn">Let's Plan! 🌸</button>
+                </div>
+            </div>
+
+            <!-- Date History -->
+            <div class="card history-card" id="historyCard">
+                <div class="card-header">
+                    <i class="fas fa-book-heart"></i>
+                    <h3>Our Date History 📖</h3>
+                </div>
+                <div class="card-content">
+                    <p>Relive our beautiful memories 💭</p>
+                    <button class="card-btn">View Memories 💕</button>
+                </div>
+            </div>
+
+            <!-- Photo Gallery -->
+            <div class="card gallery-card" id="galleryCard">
+                <div class="card-header">
+                    <i class="fas fa-images"></i>
+                    <h3>Photo Gallery 🖼️</h3>
+                </div>
+                <div class="card-content">
+                    <p>Our precious moments captured 📸</p>
+                    <button class="card-btn">Open Gallery 🔐</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Plan Date Page -->
+    <div id="planDatePage" class="page hidden">
+        <header class="page-header">
+            <button id="backToDashboard" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </button>
+            <h1>Plan Our Perfect Date 💕</h1>
+        </header>
+
+        <div class="plan-container">
+            <!-- Location Selection -->
+            <div id="locationStep" class="plan-step">
+                <h2>Choose Our Destination 🌆</h2>
+                <div class="location-grid">
+                    <div class="location-card" data-location="dhanmondi">
+                        <div class="location-icon">🏞️</div>
+                        <h3>Dhanmondi</h3>
+                        <p>Lakeside romance & cozy vibes</p>
+                    </div>
+                    <div class="location-card" data-location="uttara">
+                        <div class="location-icon">🌆</div>
+                        <h3>Uttara</h3>
+                        <p>Modern charm & city lights</p>
+                    </div>
+                    <div class="location-card" data-location="mirpur">
+                        <div class="location-icon">🌃</div>
+                        <h3>Mirpur</h3>
+                        <p>Cultural heritage & warmth</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Restaurant Selection -->
+            <div id="restaurantStep" class="plan-step hidden">
+                <h2>Pick Our Dining Spot 🍽️</h2>
+                <div id="restaurantGrid" class="restaurant-grid">
+                    <!-- Restaurants will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Time Selection -->
+            <div id="timeStep" class="plan-step hidden">
+                <h2>When Should We Meet? ⏰</h2>
+                <div class="time-form">
+                    <div class="form-group">
+                        <label for="dateInput">Date 📅</label>
+                        <input type="date" id="dateInput" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="timeInput">Time 🕐</label>
+                        <input type="time" id="timeInput" class="form-input">
+                    </div>
+                    <button id="confirmDate" class="confirm-btn">
+                        Confirm Our Date! 💖
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Date History Page -->
+    <div id="historyPage" class="page hidden">
+        <header class="page-header">
+            <button id="backFromHistory" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </button>
+            <h1>Our Beautiful Memories 📖</h1>
+        </header>
+
+        <div class="history-container">
+            <div id="historyList" class="history-list">
+                <!-- History items will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Gallery Page -->
+    <div id="galleryPage" class="page hidden">
+        <header class="page-header">
+            <button id="backFromGallery" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </button>
+            <h1>Our Photo Gallery 🖼️</h1>
+        </header>
+
+        <!-- Password Protection -->
+        <div id="galleryPassword" class="password-container">
+            <div class="password-form">
+                <h2>Enter Our Secret Code 🔐</h2>
+                <p>Only we know this special password 💕</p>
+                <input type="password" id="galleryPasswordInput" placeholder="Enter password..." class="form-input">
+                <button id="unlockGallery" class="unlock-btn">Unlock Gallery 💖</button>
+                <p id="passwordError" class="error-message hidden">Wrong password! Try again 🥺</p>
+            </div>
+        </div>
+
+        <!-- Gallery Content -->
+        <div id="galleryContent" class="gallery-container hidden">
+            <div class="gallery-header">
+                <button id="addPhoto" class="add-photo-btn">
+                    <i class="fas fa-plus"></i> Add Photo 📸
+                </button>
+            </div>
+            <div id="photoGrid" class="photo-grid">
+                <!-- Photos will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Random Date Popup -->
+    <div id="datePopup" class="popup-overlay hidden">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3 id="popupTitle">Wanna go on a date today? 🥹💖</h3>
+            </div>
+            <div class="popup-body">
+                <p id="popupMessage">I'm feeling romantic today... let's create some magic together! ✨</p>
+                <div class="popup-buttons">
+                    <button id="popupYes" class="popup-btn yes-btn">Yes, my love! 💕</button>
+                    <button id="popupNo" class="popup-btn no-btn">Maybe later 🥺</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="loading-heart">💖</div>
+            <p>Loading our love story...</p>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message hidden">
+        <i class="fas fa-heart"></i>
+        <span></span>
+    </div>
+
+    <!-- Firebase Debug Panel (only visible during development) -->
+    <div id="firebaseDebugPanel" class="firebase-debug-panel hidden">
+        <div class="debug-header">
+            <h3>🔥 Firebase Status</h3>
+            <button id="closeDebugPanel" class="close-debug">×</button>
+        </div>
+        <div class="debug-content">
+            <div class="debug-status">
+                <div id="firebaseStatus" class="status-item">
+                    <span class="status-label">Connection:</span>
+                    <span class="status-value" id="connectionStatus">Testing...</span>
+                </div>
+                <div id="firestoreStatus" class="status-item">
+                    <span class="status-label">Firestore:</span>
+                    <span class="status-value" id="dbStatus">Checking...</span>
+                </div>
+            </div>
+            <div class="debug-actions">
+                <button id="testConnectionBtn" class="debug-btn">Test Connection</button>
+                <button id="addTestDateBtn" class="debug-btn">Add Test Date</button>
+                <button id="showSetupGuideBtn" class="debug-btn">Setup Guide</button>
+            </div>
+            <div id="debugOutput" class="debug-output"></div>
+        </div>
+    </div>
+
+    <!-- Debug Toggle Button -->
+    <div id="debugToggle" class="debug-toggle">🔧</div>
+
+    <!-- Date Details Modal -->
+    <div id="dateDetailsModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📍 Our Date Details</h3>
+                <button id="closeDateDetails" class="close-modal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="date-details-container">
+                    <div class="date-info-card">
+                        <div class="date-main-info">
+                            <div class="location-info">
+                                <div class="location-icon-large">🏞️</div>
+                                <div class="location-text">
+                                    <h4 id="detailLocation">Dhanmondi</h4>
+                                    <p id="detailRestaurant">North End Coffee Roasters</p>
+                                </div>
+                            </div>
+                            <div class="datetime-info">
+                                <div class="date-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span id="detailDate">July 5, 2025</span>
+                                </div>
+                                <div class="time-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span id="detailTime">6:00 PM</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="countdown-display-large">
+                            <h5>Time Until Our Date 💕</h5>
+                            <div id="modalCountdownTimer" class="countdown-timer-large">
+                                <!-- Timer will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="date-actions">
+                            <button id="editDateBtn" class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                                Edit Date
+                            </button>
+                            <button id="deleteDateBtn" class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                                Delete Date
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteConfirmModal" class="modal-overlay hidden">
+        <div class="modal-content small-modal">
+            <div class="modal-header">
+                <h3>💔 Delete Our Date?</h3>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this date? This action cannot be undone! 🥺</p>
+                <div class="confirm-actions">
+                    <button id="cancelDelete" class="action-btn cancel-btn">Cancel</button>
+                    <button id="confirmDelete" class="action-btn delete-btn">Yes, Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="firebase-config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
