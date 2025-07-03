@@ -872,9 +872,13 @@ function populatePhotoGrid() {
     
     if (firebaseData.photos.length === 0) {
         photoGrid.innerHTML = `
-            <div class="photo-item" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
-                <p>No photos yet! 📸</p>
+            <div class="photo-item empty-gallery" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                <div class="empty-gallery-icon">📸</div>
+                <h3>No photos yet!</h3>
                 <p>Start adding your beautiful memories together 💕</p>
+                <button class="add-first-photo-btn" onclick="addPhoto()">
+                    <i class="fas fa-plus"></i> Add Your First Photo
+                </button>
             </div>
         `;
         return;
@@ -882,37 +886,130 @@ function populatePhotoGrid() {
     
     photoGrid.innerHTML = firebaseData.photos.map(photo => `
         <div class="photo-item">
-            <img src="${photo.url}" alt="${photo.caption}" />
-            <div class="photo-info">
+            <div class="photo-frame">
+                <img src="${photo.url}" alt="${photo.caption}" loading="lazy" />
+                <div class="photo-actions">
+                    <button class="photo-action-btn delete-btn" onclick="deletePhoto('${photo.id}')" title="Delete photo">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="photo-caption">
                 <p>${photo.caption}</p>
+                <span class="photo-date">${formatPhotoDate(photo.uploadedAt)}</span>
             </div>
         </div>
     `).join('');
 }
 
-async function addPhoto() {
-    showLoadingOverlay("Adding your beautiful memory...");
+// Delete photo function
+async function deletePhoto(photoId) {
+    const photo = firebaseData.photos.find(p => p.id === photoId);
+    if (!photo) return;
+    
+    const confirmed = confirm(`Delete "${photo.caption}"? This action cannot be undone! 💔`);
+    if (!confirmed) return;
+    
+    showLoadingOverlay("Removing photo...");
     
     try {
-        // For demo purposes, we'll add a placeholder photo
-        // In a real app, this would open a file picker and upload to Firebase Storage
-        const newPhoto = {
-            url: `https://picsum.photos/300/200?random=${Date.now()}`,
-            caption: `Beautiful moment ${new Date().toLocaleDateString()}`,
-            uploadedAt: firebase.firestore.FieldValue.serverTimestamp()
-        };
+        // Delete from Firestore - the listeners will update the local data and UI
+        await photosCollection.doc(photoId).delete();
+        console.log("Photo deleted with ID: ", photoId);
         
-        // Add to Firestore - the listeners will update the local data and UI
-        const docRef = await photosCollection.add(newPhoto);
-        console.log("New photo added with ID: ", docRef.id);
-        
-        showSuccessMessage("Photo added! 📸💕");
+        showSuccessMessage("Photo deleted! 🗑️");
     } catch (error) {
-        console.error("Error adding photo:", error);
-        showErrorMessage("Couldn't save your photo! 💔");
+        console.error("Error deleting photo:", error);
+        showErrorMessage("Couldn't delete photo! 💔");
     } finally {
         hideLoadingOverlay();
     }
+}
+
+// Format photo upload date
+function formatPhotoDate(timestamp) {
+    if (!timestamp) return 'Just now';
+    
+    // Handle Firestore timestamp or regular date
+    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 0) return 'Today';
+    if (diffDays === 1) return 'Yesterday';
+    if (diffDays < 7) return `${diffDays} days ago`;
+    
+    return date.toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric',
+        year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined
+    });
+}
+
+async function addPhoto() {
+    // Create file input element
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.style.display = 'none';
+    
+    fileInput.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        // Validate file size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            showErrorMessage("Photo too large! Please choose a file under 5MB 📸");
+            return;
+        }
+        
+        showLoadingOverlay("Adding your beautiful memory...");
+        
+        try {
+            // Convert image to base64 data URL
+            const imageDataUrl = await fileToDataUrl(file);
+            
+            // Get caption from user
+            const caption = prompt("Add a caption for this beautiful memory 💕:", `Beautiful moment ${new Date().toLocaleDateString()}`);
+            if (caption === null) {
+                hideLoadingOverlay();
+                return; // User cancelled
+            }
+            
+            const newPhoto = {
+                url: imageDataUrl,
+                caption: caption || `Beautiful moment ${new Date().toLocaleDateString()}`,
+                uploadedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                filename: file.name,
+                size: file.size
+            };
+            
+            // Add to Firestore - the listeners will update the local data and UI
+            const docRef = await photosCollection.add(newPhoto);
+            console.log("New photo added with ID: ", docRef.id);
+            
+            showSuccessMessage("Photo added! 📸💕");
+        } catch (error) {
+            console.error("Error adding photo:", error);
+            showErrorMessage("Couldn't save your photo! 💔");
+        } finally {
+            hideLoadingOverlay();
+        }
+    });
+    
+    // Trigger file selection
+    fileInput.click();
+}
+
+// Helper function to convert file to data URL
+function fileToDataUrl(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
 }
 
 // ===== RANDOM DATE POPUP =====
@@ -1428,27 +1525,7 @@ function addDemoData() {
         }
     );
     
-    // Add some demo photos
-    firebaseData.photos.push(
-        {
-            id: 1,
-            url: "https://picsum.photos/300/200?random=1",
-            caption: "Our first date at the lake 💕",
-            uploadedAt: "2025-06-15T19:30:00Z"
-        },
-        {
-            id: 2,
-            url: "https://picsum.photos/300/200?random=2",
-            caption: "Sunset dinner together ✨",
-            uploadedAt: "2025-06-01T19:00:00Z"
-        },
-        {
-            id: 3,
-            url: "https://picsum.photos/300/200?random=3",
-            caption: "Coffee and giggles ☕",
-            uploadedAt: "2025-05-20T16:00:00Z"
-        }
-    );
+    // Photos will now be added by user upload instead of demo data
     
     saveFirebaseData();
 }
