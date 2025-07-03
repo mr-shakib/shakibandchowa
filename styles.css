@@ -2191,36 +2191,87 @@ body {
     line-height: 1.6;
 }
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
-    .modal-content {
-        width: 95%;
-        margin: 20px;
-    }
-    
-    .modal-header,
-    .modal-body {
-        padding: 20px;
-    }
-    
-    .date-info-card {
-        padding: 20px;
-    }
-    
-    .datetime-info {
-        flex-direction: column;
-    }
-    
-    .date-actions {
-        flex-direction: column;
-    }
-    
-    .countdown-timer-large {
-        gap: 10px;
-    }
-    
-    .countdown-timer-large .time-unit {
-        min-width: 60px;
-        padding: 10px 6px;
-    }
+/* Restaurant card container */
+.restaurant-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    background: var(--white);
+    cursor: pointer;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.restaurant-card-inner {
+    position: relative;
+    height: 100%;
+}
+
+/* Status badges */
+.status-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.visited-badge {
+    background: rgba(34, 197, 94, 0.9);
+    color: white;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.could-try-badge {
+    background: rgba(20, 184, 166, 0.9);
+    color: white;
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+}
+
+.custom-badge {
+    background: rgba(255, 105, 180, 0.9);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+}
+
+/* Restaurant card image */
+.restaurant-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.restaurant-card:hover .restaurant-image {
+    transform: scale(1.05);
+}
+
+/* Restaurant details */
+.restaurant-details {
+    padding: 20px;
+    text-align: center;
+}
+
+.restaurant-details h4 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+}
+
+.restaurant-details p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.4;
 }

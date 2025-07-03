@@ -204,129 +204,174 @@ function setupRealTimeListeners() {
 // ===== RESTAURANT DATA =====
 const restaurantData = {
     dhanmondi: [
-        { 
-            name: "The Westside Cafe", 
-            type: "Cozy & Romantic 💕", 
-            image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.8,
-            price: "$$",
-            time: "10 AM - 10 PM"
-        },
-        { 
-            name: "Holey Artisan Bakery", 
-            type: "Sweet Treats & Coffee ☕",
-            image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3", 
-            rating: 4.6,
-            price: "$$",
-            time: "8 AM - 9 PM"
-        },
-        { 
-            name: "Gloria Jean's", 
-            type: "Coffee & Conversations 💬", 
-            image: "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.5,
-            price: "$$",
-            time: "9 AM - 11 PM"
-        },
-        { 
-            name: "North End Coffee Roasters", 
-            type: "Artisan Coffee ☕", 
-            image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.7,
-            price: "$$",
-            time: "7 AM - 9 PM"
-        },
-        { 
-            name: "Cafe Mango", 
-            type: "Tropical Vibes 🥭", 
-            image: "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.4,
-            price: "$",
-            time: "11 AM - 10 PM"
-        }
-    ],
-    uttara: [
-        { 
-            name: "Chillox", 
-            type: "Modern & Trendy 🌟", 
-            image: "https://images.unsplash.com/photo-1554306274-f23873d9a26c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.3,
-            price: "$$",
-            time: "12 PM - 11 PM"
-        },
-        { 
-            name: "Pizza Hut", 
-            type: "Comfort Food 🍕", 
-            image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.2,
-            price: "$$",
-            time: "11 AM - 10:30 PM"
-        },
+        // Visited Restaurants
         { 
             name: "KFC", 
-            type: "Quick & Tasty 🍗", 
-            image: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.1,
-            price: "$$",
-            time: "10 AM - 11 PM"
+            type: "Comfort Food 🍗", 
+            image: "https://kfcbd.com/storage/products/k8kyCyznKk5bG75XFqUJXsNlO.jpg",
+            visited: true
         },
         { 
-            name: "Sugandha", 
-            type: "Local Flavors 🍛", 
-            image: "https://images.unsplash.com/photo-1505253758473-96b7015fcd40?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.6,
-            price: "$$",
-            time: "11 AM - 10 PM"
+            name: "Pizzaburg", 
+            type: "Pizza & Burgers 🍕", 
+            image: "https://giftall.s3.amazonaws.com/uploads/images/packages/package_653f6ffb840bb_122732475.jpg",
+            visited: true
         },
         { 
-            name: "Dhaba Express", 
-            type: "Authentic Taste 🍜", 
-            image: "https://images.unsplash.com/photo-1631515242808-497c3fbd3972?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.4,
-            price: "$",
-            time: "11 AM - 11 PM"
-        }
-    ],
-    mirpur: [
+            name: "KOI THE", 
+            type: "Bubble Tea & Treats 🧋", 
+            image: "https://www.koithe.com/upload_image/news/news_663.jpg",
+            visited: true
+        },
         { 
             name: "Sultan's Dine", 
             type: "Traditional Elegance 👑", 
-            image: "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.9,
-            price: "$$$",
-            time: "12 PM - 10:30 PM"
+            image: "https://ecdn.dhakatribune.net/contents/cache/images/640x359x1/uploads/media/2023/09/27/sultan-kacchi-28e4136b8b28e13f514e24b144324462.jpg?jadewits_media_id=5333",
+            visited: true
         },
         { 
-            name: "Kacchi Bhai", 
-            type: "Local Specialties 🍚", 
-            image: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.7,
-            price: "$$",
-            time: "11 AM - 10 PM"
+            name: "Chillox", 
+            type: "Modern & Trendy 🌟", 
+            image: "https://www.reserveitbd.com/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Feq6wnmjdp%2FVendorGalleries%2F349%2F349_ae84be98-068b-4e7e-8b38-27fa87a4e146_Cover.jpg&w=3840&q=75",
+            visited: true
+        },
+        // Could Try (Not Visited)
+        { 
+            name: "Star Hotel and Kabab", 
+            type: "Grilled Specialties 🔥", 
+            image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/46/7e/91/photo1jpg.jpg?w=900&h=500&s=1",
+            visited: false
         },
         { 
-            name: "Foodpanda Kitchen", 
-            type: "Variety & Convenience 🥘", 
-            image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.2,
-            price: "$$",
-            time: "10 AM - 9 PM"
+            name: "Koryori", 
+            type: "Asian Fusion 🥢", 
+            image: "https://images.deliveryhero.io/image/fd-bd/LH/h5o2-listing.jpg",
+            visited: false
         },
         { 
-            name: "Bhoj Restaurant", 
-            type: "Homestyle Cooking 🏠", 
-            image: "https://images.unsplash.com/photo-1596649299486-4cdea56fd59d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.5,
-            price: "$",
-            time: "11 AM - 10 PM"
+            name: "Madchef", 
+            type: "Creative Cuisine 👨‍🍳", 
+            image: "https://images.deliveryhero.io/image/fd-bd/bd-logos/ce2hc-logo.jpg",
+            visited: false
         },
         { 
-            name: "Star Kabab", 
-            type: "Grilled Perfection 🔥", 
-            image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-            rating: 4.6,
-            price: "$$",
-            time: "12 PM - 11 PM"
+            name: "Herfy", 
+            type: "Middle Eastern 🥙", 
+            image: "https://herfybd.com/assets/image/gulshan3.jpg",
+            visited: false
+        },
+        { 
+            name: "Add Your Favourite", 
+            type: "Your Choice 💕", 
+            image: "https://gettingtotruelove.com/wp-content/uploads/2017/01/Its-always-your-choice.jpg",
+            visited: false,
+            custom: true
+        }
+    ],
+    mirpur: [
+        // Visited Restaurants
+        { 
+            name: "KFC", 
+            type: "Comfort Food 🍗", 
+            image: "https://kfcbd.com/storage/products/k8kyCyznKk5bG75XFqUJXsNlO.jpg",
+            visited: true
+        },
+        { 
+            name: "Pizzaburg", 
+            type: "Pizza & Burgers 🍕", 
+            image: "https://giftall.s3.amazonaws.com/uploads/images/packages/package_653f6ffb840bb_122732475.jpg",
+            visited: true
+        },
+        { 
+            name: "Sultan's Dine", 
+            type: "Traditional Elegance 👑", 
+            image: "https://ecdn.dhakatribune.net/contents/cache/images/640x359x1/uploads/media/2023/09/27/sultan-kacchi-28e4136b8b28e13f514e24b144324462.jpg?jadewits_media_id=5333",
+            visited: true
+        },
+        { 
+            name: "Chillox", 
+            type: "Modern & Trendy 🌟", 
+            image: "https://www.reserveitbd.com/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Feq6wnmjdp%2FVendorGalleries%2F349%2F349_ae84be98-068b-4e7e-8b38-27fa87a4e146_Cover.jpg&w=3840&q=75",
+            visited: true
+        },
+        // Could Try (Not Visited)
+        { 
+            name: "Fuoco", 
+            type: "Italian Fine Dining 🍝", 
+            image: "https://images.deliveryhero.io/image/fd-bd/bd-logos/cw0xb-logo.jpg",
+            visited: false
+        },
+        { 
+            name: "Roadside Kitchen", 
+            type: "Street Food Vibes 🍛", 
+            image: "https://www.moumachi.com.bd//images/listings/41972/business/20239-266798038-670378134341597-7554017653012876605-n.jpg",
+            visited: false
+        },
+        { 
+            name: "Add Your Favourite", 
+            type: "Your Choice 💕", 
+            image: "https://gettingtotruelove.com/wp-content/uploads/2017/01/Its-always-your-choice.jpg",
+            visited: false,
+            custom: true
+        }
+    ],
+    uttara: [
+        // Visited Restaurants
+        { 
+            name: "Pizzaburg", 
+            type: "Pizza & Burgers 🍕", 
+            image: "https://giftall.s3.amazonaws.com/uploads/images/packages/package_653f6ffb840bb_122732475.jpg",
+            visited: true
+        },
+        { 
+            name: "KOI THE", 
+            type: "Bubble Tea & Treats 🧋", 
+            image: "https://www.koithe.com/upload_image/news/news_663.jpg",
+            visited: true
+        },
+        { 
+            name: "Alfresco", 
+            type: "Outdoor Dining 🌿", 
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRupj2hEz804HWUDzLihTQAQvUGAppFbMY_aQ&s",
+            visited: true
+        },
+        // Could Try (Not Visited)
+        { 
+            name: "KFC", 
+            type: "Comfort Food 🍗", 
+            image: "https://kfcbd.com/storage/products/k8kyCyznKk5bG75XFqUJXsNlO.jpg",
+            visited: false
+        },
+        { 
+            name: "Takeout", 
+            type: "Quick Bites 🥡", 
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJSx4h0JclAXKJ0Ew4QnYhqkDTT7ZEVX_piA&s",
+            visited: false
+        },
+        { 
+            name: "Digger", 
+            type: "Unique Experience 🏗️", 
+            image: "https://www.tbsnews.net/sites/default/files/styles/infograph/public/images/2021/12/09/food_dhanmondi_11.jpg",
+            visited: false
+        },
+        { 
+            name: "Chillox", 
+            type: "Modern & Trendy 🌟", 
+            image: "https://www.reserveitbd.com/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Feq6wnmjdp%2FVendorGalleries%2F349%2F349_ae84be98-068b-4e7e-8b38-27fa87a4e146_Cover.jpg&w=3840&q=75",
+            visited: false
+        },
+        { 
+            name: "Crimson Cup", 
+            type: "Coffee & More ☕", 
+            image: "https://www.crimsoncup.com/assets/cc_bangladesh_DhanmondiSouth.jpeg",
+            visited: false
+        },
+        { 
+            name: "Add Your Favourite", 
+            type: "Your Choice 💕", 
+            image: "https://gettingtotruelove.com/wp-content/uploads/2017/01/Its-always-your-choice.jpg",
+            visited: false,
+            custom: true
         }
     ]
 };
@@ -546,45 +591,55 @@ function populateRestaurants() {
         restaurantCard.className = 'restaurant-card';
         restaurantCard.dataset.restaurant = restaurant.name;
         
-        // Generate star rating HTML
-        let starsHTML = '';
-        const fullStars = Math.floor(restaurant.rating);
-        const halfStar = restaurant.rating % 1 >= 0.5;
-        
-        for (let i = 0; i < 5; i++) {
-            if (i < fullStars) {
-                starsHTML += '<i class="fas fa-star"></i>';
-            } else if (i === fullStars && halfStar) {
-                starsHTML += '<i class="fas fa-star-half-alt"></i>';
-            } else {
-                starsHTML += '<i class="far fa-star"></i>';
-            }
+        // Generate status badge
+        let statusBadge = '';
+        if (restaurant.visited) {
+            statusBadge = '<div class="status-badge visited-badge">✓ Visited</div>';
+        } else if (restaurant.custom) {
+            statusBadge = '<div class="status-badge custom-badge">💕 Your Choice</div>';
+        } else {
+            statusBadge = '<div class="status-badge could-try-badge">? Could Try</div>';
         }
         
         restaurantCard.innerHTML = `
-            <img src="${restaurant.image}" alt="${restaurant.name}" class="restaurant-image">
-            <div class="restaurant-details">
-                <h4>${restaurant.name}</h4>
-                <p>${restaurant.type}</p>
-                <div class="restaurant-rating">
-                    ${starsHTML} 
-                    <span style="margin-left:5px">${restaurant.rating}</span>
-                </div>
-                <div class="restaurant-info">
-                    <span><i class="fas fa-dollar-sign"></i> ${restaurant.price}</span>
-                    <span><i class="fas fa-clock"></i> ${restaurant.time}</span>
+            <div class="restaurant-card-inner">
+                <img src="${restaurant.image}" alt="${restaurant.name}" class="restaurant-image">
+                ${statusBadge}
+                <div class="restaurant-details">
+                    <h4>${restaurant.name}</h4>
+                    <p>${restaurant.type}</p>
                 </div>
             </div>
         `;
         
         restaurantCard.addEventListener('click', function() {
-            selectedRestaurant = restaurant.name;
-            selectRestaurantCard(this);
-            setTimeout(showTimeStep, 500);
+            if (restaurant.custom) {
+                handleCustomRestaurant();
+            } else {
+                selectedRestaurant = restaurant.name;
+                selectRestaurantCard(this);
+                setTimeout(showTimeStep, 500);
+            }
         });
         
         restaurantGrid.appendChild(restaurantCard);
     });
+}
+
+function handleCustomRestaurant() {
+    const customName = prompt("Enter your favourite restaurant name 💕:", "");
+    if (customName && customName.trim()) {
+        selectedRestaurant = customName.trim();
+        
+        // Update the selected card visually
+        const customCard = document.querySelector('.restaurant-card.custom');
+        if (customCard) {
+            customCard.querySelector('h4').textContent = selectedRestaurant;
+            selectRestaurantCard(customCard);
+        }
+        
+        setTimeout(showTimeStep, 500);
+    }
 }
 
 function selectRestaurantCard(selectedCard) {
