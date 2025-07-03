@@ -519,53 +519,6 @@ body {
     }
 }
 
-/* ===== BUTTON STYLES ===== */
-
-/* Welcome Screen Enter Button */
-.enter-btn {
-    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-    color: white;
-    border: none;
-    padding: 18px 40px;
-    border-radius: 35px;
-    font-size: 1.3rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 8px 30px rgba(255, 107, 107, 0.3);
-}
-
-.enter-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.6s ease;
-}
-
-.enter-btn:hover::before {
-    left: 100%;
-}
-
-.enter-btn:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
-    background: linear-gradient(135deg, #ff5252, #ff7979);
-}
-
-.enter-btn:focus {
-    outline: 3px solid rgba(255, 107, 107, 0.4);
-    outline-offset: 3px;
-}
-
 /* ===== DASHBOARD ===== */
 .dashboard-header {
     text-align: center;
@@ -673,16 +626,15 @@ body {
     background: var(--gradient-main);
     color: white;
     border: none;
-    padding: 16px 32px;
+    padding: 14px 28px;
     border-radius: 30px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
     transition: var(--transition);
     margin-top: 20px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 25px var(--shadow-teal);
 }
 
 .card-btn::before {
@@ -692,8 +644,8 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-    transition: left 0.5s ease;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
 }
 
 .card-btn:hover::before {
@@ -701,14 +653,8 @@ body {
 }
 
 .card-btn:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 15px 35px var(--shadow-teal-dark);
-    background: linear-gradient(135deg, var(--secondary-teal), var(--accent-teal-dark));
-}
-
-.card-btn:focus {
-    outline: 3px solid var(--accent-teal-light);
-    outline-offset: 3px;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px var(--shadow-teal);
 }
 
 /* ===== COUNTDOWN CARD ===== */
@@ -830,48 +776,24 @@ body {
 
 .back-btn {
     background: var(--glass-bg);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(10px);
     border: 2px solid var(--primary-teal);
     color: var(--primary-teal);
-    padding: 14px 28px;
+    padding: 12px 24px;
     border-radius: 30px;
     cursor: pointer;
     transition: var(--transition);
-    font-weight: 600;
+    font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 1rem;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 15px var(--shadow-soft);
-}
-
-.back-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.1), transparent);
-    transition: left 0.5s ease;
-}
-
-.back-btn:hover::before {
-    left: 100%;
+    gap: 8px;
 }
 
 .back-btn:hover {
     background: var(--primary-teal);
     color: white;
     transform: translateX(-8px) scale(1.05);
-    box-shadow: 0 10px 25px var(--shadow-teal);
-}
-
-.back-btn:focus {
-    outline: 3px solid var(--accent-teal-light);
-    outline-offset: 3px;
+    box-shadow: 0 8px 20px var(--shadow-teal);
 }
 
 .page-header h1 {
@@ -1156,7 +1078,6 @@ body {
     margin-top: 15px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 25px var(--shadow-teal);
 }
 
 .confirm-btn::before {
@@ -1166,8 +1087,8 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-    transition: left 0.5s ease;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
 }
 
 .confirm-btn:hover::before {
@@ -1175,14 +1096,8 @@ body {
 }
 
 .confirm-btn:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 15px 35px var(--shadow-teal-dark);
-    background: linear-gradient(135deg, var(--secondary-teal), var(--accent-teal-dark));
-}
-
-.confirm-btn:focus {
-    outline: 3px solid var(--accent-teal-light);
-    outline-offset: 3px;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px var(--shadow-teal);
 }
 
 /* ===== HISTORY PAGE ===== */
@@ -1263,42 +1178,17 @@ body {
     background: var(--gradient-main);
     color: white;
     border: none;
-    padding: 16px;
-    border-radius: var(--border-radius-small);
+    padding: 15px;
+    border-radius: 15px;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
     margin-top: 15px;
-    font-size: 1.1rem;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 6px 20px var(--shadow-teal);
-}
-
-.unlock-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-    transition: left 0.5s ease;
-}
-
-.unlock-btn:hover::before {
-    left: 100%;
 }
 
 .unlock-btn:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 12px 30px var(--shadow-teal-dark);
-    background: linear-gradient(135deg, var(--secondary-teal), var(--accent-teal-dark));
-}
-
-.unlock-btn:focus {
-    outline: 3px solid var(--accent-teal-light);
-    outline-offset: 3px;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px var(--shadow-teal);
 }
 
 .error-message {
@@ -1321,44 +1211,16 @@ body {
     background: var(--gradient-main);
     color: white;
     border: none;
-    padding: 14px 28px;
+    padding: 12px 25px;
     border-radius: 25px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
     transition: var(--transition);
-    font-size: 1rem;
-    position: relative;
-    overflow: hidden;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 6px 20px var(--shadow-teal);
-}
-
-.add-photo-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-    transition: left 0.5s ease;
-}
-
-.add-photo-btn:hover::before {
-    left: 100%;
 }
 
 .add-photo-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 10px 25px var(--shadow-teal-dark);
-    background: linear-gradient(135deg, var(--secondary-teal), var(--accent-teal-dark));
-}
-
-.add-photo-btn:focus {
-    outline: 3px solid var(--accent-teal-light);
-    outline-offset: 3px;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow-teal);
 }
 
 .photo-grid {
@@ -1493,47 +1355,23 @@ body {
 }
 
 .add-first-photo-btn {
-    background: var(--gradient-main);
-    color: white;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
     border: none;
-    padding: 16px 30px;
+    padding: 12px 24px;
     border-radius: 25px;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 0.95rem;
+    font-weight: 500;
     cursor: pointer;
     transition: var(--transition);
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 6px 20px var(--shadow-teal);
-}
-
-.add-first-photo-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-    transition: left 0.6s ease;
-}
-
-.add-first-photo-btn:hover::before {
-    left: 100%;
+    gap: 8px;
 }
 
 .add-first-photo-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 10px 25px var(--shadow-teal-dark);
-    background: linear-gradient(135deg, var(--secondary-teal), var(--accent-teal-dark));
-}
-
-.add-first-photo-btn:focus {
-    outline: 3px solid var(--accent-teal-light);
-    outline-offset: 3px;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow-teal);
 }
 
 /* ===== POPUP ===== */
