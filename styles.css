@@ -250,6 +250,53 @@ body {
 }
 
 
+/* ===== BUTTON STYLES ===== */
+
+/* Welcome Screen Enter Button */
+.enter-btn {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 35px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 30px rgba(255, 107, 107, 0.3);
+}
+
+.enter-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.enter-btn:hover::before {
+    left: 100%;
+}
+
+.enter-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+    background: linear-gradient(135deg, #ff5252, #ff7979);
+}
+
+.enter-btn:focus {
+    outline: 3px solid rgba(255, 107, 107, 0.4);
+    outline-offset: 3px;
+}
+
 /* ===== DASHBOARD ===== */
 .dashboard-header {
     text-align: center;
@@ -357,15 +404,16 @@ body {
     background: var(--gradient-main);
     color: white;
     border: none;
-    padding: 14px 28px;
+    padding: 16px 32px;
     border-radius: 30px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
     margin-top: 20px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 8px 25px var(--shadow-teal);
 }
 
 .card-btn::before {
@@ -375,8 +423,8 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transition: left 0.5s ease;
 }
 
 .card-btn:hover::before {
@@ -384,8 +432,14 @@ body {
 }
 
 .card-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 25px var(--shadow-teal);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 15px 35px var(--shadow-teal-dark);
+    background: linear-gradient(135deg, var(--secondary-teal), var(--accent-teal-dark));
+}
+
+.card-btn:focus {
+    outline: 3px solid var(--accent-teal-light);
+    outline-offset: 3px;
 }
 
 /* ===== COUNTDOWN CARD ===== */
@@ -507,24 +561,48 @@ body {
 
 .back-btn {
     background: var(--glass-bg);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     border: 2px solid var(--primary-teal);
     color: var(--primary-teal);
-    padding: 12px 24px;
+    padding: 14px 28px;
     border-radius: 30px;
     cursor: pointer;
     transition: var(--transition);
-    font-weight: 500;
+    font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--shadow-soft);
+}
+
+.back-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.back-btn:hover::before {
+    left: 100%;
 }
 
 .back-btn:hover {
     background: var(--primary-teal);
     color: white;
     transform: translateX(-8px) scale(1.05);
-    box-shadow: 0 8px 20px var(--shadow-teal);
+    box-shadow: 0 10px 25px var(--shadow-teal);
+}
+
+.back-btn:focus {
+    outline: 3px solid var(--accent-teal-light);
+    outline-offset: 3px;
 }
 
 .page-header h1 {
@@ -809,6 +887,7 @@ body {
     margin-top: 15px;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 8px 25px var(--shadow-teal);
 }
 
 .confirm-btn::before {
@@ -818,8 +897,8 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transition: left 0.5s ease;
 }
 
 .confirm-btn:hover::before {
@@ -827,8 +906,14 @@ body {
 }
 
 .confirm-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 30px var(--shadow-teal);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 35px var(--shadow-teal-dark);
+    background: linear-gradient(135deg, var(--secondary-teal), var(--accent-teal-dark));
+}
+
+.confirm-btn:focus {
+    outline: 3px solid var(--accent-teal-light);
+    outline-offset: 3px;
 }
 
 /* ===== HISTORY PAGE ===== */
@@ -909,17 +994,42 @@ body {
     background: var(--gradient-main);
     color: white;
     border: none;
-    padding: 15px;
-    border-radius: 15px;
+    padding: 16px;
+    border-radius: var(--border-radius-small);
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
     margin-top: 15px;
+    font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 20px var(--shadow-teal);
+}
+
+.unlock-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transition: left 0.5s ease;
+}
+
+.unlock-btn:hover::before {
+    left: 100%;
 }
 
 .unlock-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px var(--shadow-teal);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 30px var(--shadow-teal-dark);
+    background: linear-gradient(135deg, var(--secondary-teal), var(--accent-teal-dark));
+}
+
+.unlock-btn:focus {
+    outline: 3px solid var(--accent-teal-light);
+    outline-offset: 3px;
 }
 
 .error-message {
@@ -942,16 +1052,44 @@ body {
     background: var(--gradient-main);
     color: white;
     border: none;
-    padding: 12px 25px;
+    padding: 14px 28px;
     border-radius: 25px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 20px var(--shadow-teal);
+}
+
+.add-photo-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transition: left 0.5s ease;
+}
+
+.add-photo-btn:hover::before {
+    left: 100%;
 }
 
 .add-photo-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px var(--shadow-teal);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px var(--shadow-teal-dark);
+    background: linear-gradient(135deg, var(--secondary-teal), var(--accent-teal-dark));
+}
+
+.add-photo-btn:focus {
+    outline: 3px solid var(--accent-teal-light);
+    outline-offset: 3px;
 }
 
 .photo-grid {
@@ -1086,23 +1224,47 @@ body {
 }
 
 .add-first-photo-btn {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--white);
+    background: var(--gradient-main);
+    color: white;
     border: none;
-    padding: 12px 24px;
+    padding: 16px 30px;
     border-radius: 25px;
-    font-size: 0.95rem;
-    font-weight: 500;
+    font-size: 1.1rem;
+    font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 20px var(--shadow-teal);
+}
+
+.add-first-photo-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transition: left 0.6s ease;
+}
+
+.add-first-photo-btn:hover::before {
+    left: 100%;
 }
 
 .add-first-photo-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px var(--shadow-teal);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px var(--shadow-teal-dark);
+    background: linear-gradient(135deg, var(--secondary-teal), var(--accent-teal-dark));
+}
+
+.add-first-photo-btn:focus {
+    outline: 3px solid var(--accent-teal-light);
+    outline-offset: 3px;
 }
 
 /* ===== POPUP ===== */
@@ -2005,4 +2167,774 @@ body {
     font-size: 0.95rem;
     margin: 0;
     line-height: 1.4;
+}
+
+/* ===========================================
+   DASHBOARD ANIMATIONS & ENHANCEMENTS (OPTIMIZED)
+   =========================================== */
+
+/* Dashboard Floating Elements - Reduced for Performance */
+.dashboard-floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.float-element {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0.4;
+    animation: float 8s ease-in-out infinite;
+    will-change: transform;
+}
+
+/* Reduced to 4 elements for better performance */
+.dashboard-element-1 {
+    top: 15%;
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 9s;
+}
+
+.dashboard-element-2 {
+    top: 25%;
+    right: 15%;
+    animation-delay: 2s;
+    animation-duration: 8s;
+}
+
+.dashboard-element-3 {
+    top: 65%;
+    left: 15%;
+    animation-delay: 4s;
+    animation-duration: 10s;
+}
+
+.dashboard-element-4 {
+    top: 45%;
+    right: 10%;
+    animation-delay: 6s;
+    animation-duration: 9s;
+}
+
+/* Hide extra elements to reduce animation load */
+.dashboard-element-5,
+.dashboard-element-6,
+.dashboard-element-7,
+.dashboard-element-8 {
+    display: none;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateY(-15px) rotate(3deg);
+        opacity: 0.6;
+    }
+}
+
+/* Dashboard Header Animations - Optimized */
+.dashboard-title-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dashboard-icon-pulse {
+    font-size: 32px;
+    animation: pulse-heart 3s ease-in-out infinite;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.dashboard-title {
+    background: linear-gradient(45deg, var(--primary-teal), var(--accent-coral), var(--primary-teal));
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradient-shift 4s ease-in-out infinite;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.dashboard-sparkles {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.sparkle {
+    position: absolute;
+    font-size: 14px;
+    animation: sparkle-dance 3s ease-in-out infinite;
+}
+
+.sparkle-1 {
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.sparkle-2 {
+    top: 30%;
+    right: 25%;
+    animation-delay: 1s;
+}
+
+.sparkle-3 {
+    top: 15%;
+    left: 70%;
+    animation-delay: 2s;
+}
+
+@keyframes pulse-heart {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes sparkle-dance {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+/* Enhanced Dashboard Cards */
+.animated-card {
+    position: relative;
+    animation: card-entrance 0.8s ease-out forwards;
+    opacity: 0;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.animated-card[data-animation-delay="0.1s"] {
+    animation-delay: 0.1s;
+}
+
+.animated-card[data-animation-delay="0.2s"] {
+    animation-delay: 0.2s;
+}
+
+.animated-card[data-animation-delay="0.3s"] {
+    animation-delay: 0.3s;
+}
+
+.animated-card[data-animation-delay="0.4s"] {
+    animation-delay: 0.4s;
+}
+
+.card-glow {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary-teal), var(--accent-coral), var(--primary-teal));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.animated-card:hover .card-glow {
+    opacity: 0.3;
+}
+
+.animated-card:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes card-entrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Card Icon Animations - Optimized */
+.card-icon-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.card-icon-pulse {
+    animation: icon-pulse 3s ease-in-out infinite;
+    color: var(--accent-coral);
+}
+
+.card-icon-bounce {
+    animation: icon-bounce 3s ease-in-out infinite;
+    color: var(--primary-teal);
+}
+
+.card-icon-flip {
+    animation: icon-flip 4s ease-in-out infinite;
+    color: var(--accent-coral);
+}
+
+.card-icon-rotate {
+    animation: icon-rotate 6s linear infinite;
+    color: var(--primary-teal);
+}
+
+@keyframes icon-pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes icon-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes icon-flip {
+    0%, 100% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(180deg);
+    }
+}
+
+@keyframes icon-rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Card Decorations - Simplified */
+.card-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.decoration-heart,
+.decoration-star,
+.decoration-memory,
+.decoration-photo {
+    position: absolute;
+    font-size: 12px;
+    opacity: 0.4;
+    animation: decoration-float 6s ease-in-out infinite;
+}
+
+.decoration-heart-1,
+.decoration-star-1,
+.decoration-memory-1,
+.decoration-photo-1 {
+    top: 15%;
+    right: 15%;
+    animation-delay: 0s;
+}
+
+.decoration-heart-2,
+.decoration-star-2,
+.decoration-memory-2,
+.decoration-photo-2 {
+    bottom: 20%;
+    left: 10%;
+    animation-delay: 3s;
+}
+
+@keyframes decoration-float {
+    0%, 100% {
+        transform: translateY(0px);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateY(-8px);
+        opacity: 0.6;
+    }
+}
+
+/* Enhanced Button Animations */
+.animated-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animated-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.animated-btn:hover::before {
+    left: 100%;
+}
+
+.animated-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.animated-btn:active {
+    transform: translateY(0);
+}
+
+.btn-emoji {
+    display: inline-block;
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.animated-btn:hover .btn-emoji {
+    transform: scale(1.2) rotate(10deg);
+}
+
+/* Card hover effects consolidated above to prevent conflicts */
+
+.animated-card:hover .card-icon-pulse {
+    animation-duration: 1s;
+}
+
+.animated-card:hover .card-icon-bounce {
+    animation-duration: 1s;
+}
+
+.animated-card:hover .card-icon-flip {
+    animation-duration: 2s;
+}
+
+.animated-card:hover .card-icon-rotate {
+    animation-duration: 2s;
+}
+
+/* Dashboard Grid Enhancement */
+.dashboard-grid {
+    position: relative;
+    z-index: 2;
+}
+
+/* Dashboard Page Background Enhancement */
+#dashboard {
+    position: relative;
+    background: linear-gradient(135deg, 
+        rgba(72, 187, 164, 0.02) 0%, 
+        rgba(255, 107, 107, 0.02) 50%,        rgba(72, 187, 164, 0.02) 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#dashboard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(72, 187, 164, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(72, 187, 164, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Responsive Dashboard Animations */
+@media (max-width: 768px) {
+    .dashboard-title {
+        font-size: 2rem;
+    }
+    
+    .dashboard-icon-pulse {
+        font-size: 28px;
+    }
+    
+    .float-element {
+        font-size: 20px;
+    }
+    
+    .animated-card:hover {
+        transform: translateY(-3px) scale(1.01);
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-title {
+        font-size: 1.8rem;
+    }
+    
+    .dashboard-icon-pulse {
+        font-size: 24px;
+    }
+    
+    .float-element {
+        font-size: 18px;
+    }
+    
+    .sparkle {
+        font-size: 14px;
+    }
+}
+
+/* ===========================================
+   ADDITIONAL DASHBOARD MICRO-INTERACTIONS
+   =========================================== */
+
+/* Particle Background - Disabled for Performance */
+.dashboard-particles {
+    display: none; /* Disabled to prevent shaking */
+}
+
+/* Enhanced Card Hover Effects */
+.countdown-card:hover {
+    background: linear-gradient(135deg, rgba(72, 187, 164, 0.08), rgba(255, 255, 255, 0.95));
+}
+
+.plan-card:hover {
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.08), rgba(255, 255, 255, 0.95));
+}
+
+.history-card:hover {
+    background: linear-gradient(135deg, rgba(72, 187, 164, 0.06), rgba(255, 107, 107, 0.06), rgba(255, 255, 255, 0.95));
+}
+
+.gallery-card:hover {
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.08), rgba(255, 255, 255, 0.95));
+}
+
+/* Interactive Button Ripple Effect */
+.card-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.card-btn:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Dashboard Header Subtitle Enhancement */
+.subtitle {
+    position: relative;
+    color: var(--text-medium);
+    font-size: 1.1rem;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 10px;
+    opacity: 0;
+    animation: subtitle-fade-in 1s ease-out 0.5s forwards;
+}
+
+.subtitle::before {
+    content: '✨';
+    margin-right: 8px;
+    animation: sparkle-rotate 2s linear infinite;
+}
+
+.subtitle::after {
+    content: '✨';
+    margin-left: 8px;
+    animation: sparkle-rotate 2s linear infinite reverse;
+}
+
+@keyframes subtitle-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes sparkle-rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Enhanced Loading States */
+.card-content p {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.animated-card:hover .card-content p {
+    transform: translateY(-2px);
+    color: var(--text-primary);
+}
+
+/* Dashboard Grid Stagger Animation */
+.dashboard-grid {
+    opacity: 0;
+    animation: grid-fade-in 0.8s ease-out 0.3s forwards;
+}
+
+@keyframes grid-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Card Content Animation */
+.card-content {
+    transition: all 0.3s ease;
+}
+
+.animated-card:hover .card-content {
+    transform: translateY(-2px);
+}
+
+/* Special Effects for Date Cards */
+.countdown-card .card-header::before {
+    content: '💕';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 12px;
+    opacity: 0;
+    animation: heart-pop 2s ease-in-out infinite;
+}
+
+.plan-card .card-header::before {
+    content: '✨';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 12px;
+    opacity: 0;
+    animation: star-twinkle 1.5s ease-in-out infinite;
+}
+
+@keyframes heart-pop {
+    0%, 80%, 100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    10%, 70% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+@keyframes star-twinkle {
+    0%, 60%, 100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1.3) rotate(180deg);
+    }
+}
+
+/* Dashboard Enter Animation - Removed to prevent conflicts */
+/* 
+#dashboard.active {
+    animation: dashboard-enter 1s ease-out forwards;
+}
+
+@keyframes dashboard-enter {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+*/
+
+/* Touch Device Enhancements */
+@media (hover: none) and (pointer: coarse) {
+    .animated-card:hover {
+        transform: none;
+    }
+    
+    .animated-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* Dashboard Animation Support Classes */
+.animate-in {
+    animation-play-state: running !important;
+}
+
+/* Enhanced Page Transitions */
+.page {
+    transition: opacity 0.5s ease;
+}
+
+.page.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.page:not(.hidden) {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Dashboard Active State with Smooth Entrance */
+#dashboard.active {
+    animation: dashboard-fade-in 0.8s ease-out forwards;
+}
+
+@keyframes dashboard-fade-in {
+    from {
+        opacity: 0.8;
+    }
+    to {
+        opacity: 1;
+    }
+}
+#dashboard.active .dashboard-title {
+    animation-play-state: running;
+}
+
+#dashboard.active .dashboard-icon-pulse {
+    animation-play-state: running;
+}
+
+#dashboard.active .sparkle {
+    animation-play-state: running;
+}
+
+/* Performance Optimization */
+.dashboard-floating-elements,
+.dashboard-particles {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.float-element,
+.particle {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+.animated-card {
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .float-element,
+    .particle,
+    .dashboard-icon-pulse,
+    .sparkle,
+    .card-icon-pulse,
+    .card-icon-bounce,
+    .card-icon-flip,
+    .card-icon-rotate,
+    .decoration-heart,
+    .decoration-star,
+    .decoration-memory {
+        animation: none !important;
+    }
+    
+    .animated-card {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    .dashboard-title {
+        animation: none !important;
+        background: var(--primary-teal) !important;
+        -webkit-background-clip: initial !important;
+        background-clip: initial !important;
+        -webkit-text-fill-color: initial !important;
+        color: var(--primary-teal) !important;
+    }
 }

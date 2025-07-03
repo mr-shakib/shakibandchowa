@@ -443,7 +443,21 @@ function hideLoadingOverlay() {
 
 function showDashboard() {
     hideAllPages();
-    document.getElementById('dashboard').classList.remove('hidden');
+    const dashboard = document.getElementById('dashboard');
+    dashboard.classList.remove('hidden');
+    
+    // Trigger dashboard entrance animation
+    setTimeout(() => {
+        dashboard.classList.add('active');
+    }, 50);
+    
+    // Trigger card animations with stagger effect
+    const cards = dashboard.querySelectorAll('.animated-card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${0.1 + (index * 0.1)}s`;
+        card.classList.add('animate-in');
+    });
+    
     updateCountdownCard();
 }
 
@@ -455,7 +469,34 @@ function hideAllPages() {
 // ===== EVENT LISTENERS =====
 function initializeEventListeners() {
     // New animation enter button
-    document.getElementById('letsGoBtn').addEventListener('click', showDashboard);
+    // Note: Let's Go button is handled by the dedicated setup function above
+    // to ensure it works regardless of initialization issues
+    
+    /*
+    // Enhanced "Let's Go" button with smooth transition
+    document.getElementById('letsGoBtn').addEventListener('click', function() {
+        // Add click animation to button
+        this.style.transform = 'scale(0.95)';
+        this.style.transition = 'transform 0.1s ease';
+        
+        setTimeout(() => {
+            this.style.transform = '';
+            // Add fade out to homepage
+            document.getElementById('customAnimationPage').style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            document.getElementById('customAnimationPage').style.opacity = '0';
+            document.getElementById('customAnimationPage').style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                showDashboard();
+                // Reset homepage for next time
+                setTimeout(() => {
+                    document.getElementById('customAnimationPage').style.opacity = '';
+                    document.getElementById('customAnimationPage').style.transform = '';
+                }, 100);
+            }, 300);
+        }, 100);
+    });
+    */
     
     // Dashboard card clicks
     document.getElementById('planCard').addEventListener('click', showPlanDatePage);
@@ -1480,92 +1521,70 @@ function initializeDateDetailsModal() {
     });
 }
 
-// ===== UTILITY FUNCTIONS =====
-function capitalizeFirst(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-    });
-}
-
-function formatDateTime(dateString, timeString) {
-    const date = new Date(dateString);
-    const [hours, minutes] = timeString.split(':');
-    
-    const dateFormat = date.toLocaleDateString('en-US', { 
-        weekday: 'short', 
-        month: 'short', 
-        day: 'numeric' 
-    });
-    
-    const timeFormat = new Date(2000, 0, 1, hours, minutes).toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-    });
-    
-    return `${dateFormat} at ${timeFormat}`;
-}
-
-function formatTime(timeString) {
-    const [hours, minutes] = timeString.split(':');
-    const date = new Date(2000, 0, 1, hours, minutes);
-    
-    return date.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-    });
-}
-
-function showSuccessMessage(message) {
-    const successElement = document.getElementById('successMessage');
-    successElement.querySelector('span').textContent = message;
-    successElement.classList.remove('hidden');
-    
-    setTimeout(() => {
-        successElement.classList.add('hidden');
-    }, 3000);
-}
-
-function showErrorMessage(message) {
-    // For simplicity, using alert. In a real app, you'd create a proper error message component
-    alert(message);
-}
-
-// ===== DEMO DATA (for testing) =====
-function addDemoData() {
-    // Add some demo dates for testing
-    firebaseData.dateHistory.push(
-        {
-            id: 1,
-            location: "dhanmondi",
-            restaurant: "The Westside Cafe",
-            date: "2025-06-15",
-            time: "19:00",
-            completedAt: "2025-06-15T19:00:00Z"
-        },
-        {
-            id: 2,
-            location: "uttara",
-            restaurant: "Chillox",
-            date: "2025-06-01",
-            time: "18:30",
-            completedAt: "2025-06-01T18:30:00Z"
+// ===== BUTTON FUNCTIONALITY ENSURANCE =====
+// Ensure the Let's Go button works regardless of other initialization issues
+(function() {
+    function setupLetsGoButton() {
+        const letsGoBtn = document.getElementById('letsGoBtn');
+        if (letsGoBtn) {
+            console.log('Setting up Let\'s Go button...');
+            
+            // Clear any existing listeners
+            letsGoBtn.onclick = null;
+            
+            // Add new listener
+            letsGoBtn.addEventListener('click', function(e) {
+                console.log('Let\'s Go button clicked!');
+                e.preventDefault();
+                e.stopPropagation();
+                
+                try {
+                    // Simple transition to dashboard
+                    const homepage = document.getElementById('customAnimationPage');
+                    const dashboard = document.getElementById('dashboard');
+                    
+                    if (homepage && dashboard) {
+                        homepage.classList.add('hidden');
+                        dashboard.classList.remove('hidden');
+                        
+                        // Trigger dashboard animation
+                        setTimeout(() => {
+                            dashboard.classList.add('active');
+                            
+                            // Trigger card animations
+                            const cards = dashboard.querySelectorAll('.animated-card');
+                            cards.forEach((card, index) => {
+                                card.style.animationDelay = `${0.1 + (index * 0.1)}s`;
+                                card.classList.add('animate-in');
+                            });
+                        }, 50);
+                        
+                        // Try to update countdown if function exists
+                        if (typeof updateCountdownCard === 'function') {
+                            updateCountdownCard();
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error transitioning to dashboard:', error);
+                    // Fallback - just show dashboard
+                    document.getElementById('customAnimationPage').style.display = 'none';
+                    document.getElementById('dashboard').style.display = 'block';
+                }
+            });
+            
+            console.log('Let\'s Go button setup complete!');
+        } else {
+            console.error('letsGoBtn not found!');
         }
-    );
+    }
     
-    // Photos will now be added by user upload instead of demo data
+    // Try to setup immediately if DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupLetsGoButton);
+    } else {
+        setupLetsGoButton();
+    }
     
-    saveFirebaseData();
-}
-
-// Uncomment the line below to add demo data for testing
-// addDemoData();
+    // Also try after a short delay as backup
+    setTimeout(setupLetsGoButton, 100);
+})();
