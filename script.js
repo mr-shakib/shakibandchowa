@@ -385,12 +385,14 @@ let isGalleryUnlocked = false;
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', async function() {
-    showLoadingScreen();
-    
     // Initialize debug panel
     initializeDebugPanel();
     
     try {
+        // Show the animation page first
+        hideAllPages();
+        document.getElementById('customAnimationPage').classList.remove('hidden');
+
         // Wait a moment for Firebase to fully initialize
         await new Promise(resolve => setTimeout(resolve, 1000));
         
@@ -398,17 +400,15 @@ document.addEventListener('DOMContentLoaded', async function() {
         const firebaseConnected = await testFirebaseConnection();
         
         if (firebaseConnected) {
-            // Load data from Firebase
+            // Load data from Firebase in the background
             await loadFirebaseData();
-            
             // Set up real-time listeners for data changes
             setupRealTimeListeners();
         } else {
             console.warn("Falling back to local storage mode");
         }
         
-        // Initialize UI
-        checkFriendshipDay();
+        // Initialize UI components that are not visible yet
         initializeEventListeners();
         initializeDateDetailsModal();
         updateCountdownCard();
@@ -418,8 +418,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     } catch (error) {
         console.error("Initialization error:", error);
         showErrorMessage("Something went wrong! 💔 Please try refreshing the page.");
-    } finally {
-        hideLoadingScreen();
     }
 });
 
@@ -443,22 +441,6 @@ function hideLoadingOverlay() {
     document.getElementById('loadingOverlay').classList.add('hidden');
 }
 
-function checkFriendshipDay() {
-    const today = new Date();
-    const isJuly3rd = today.getMonth() === 6 && today.getDate() === 3; // July is month 6 (0-indexed)
-    
-    if (isJuly3rd) {
-        showFriendshipDayPage();
-    } else {
-        showDashboard();
-    }
-}
-
-function showFriendshipDayPage() {
-    hideAllPages();
-    document.getElementById('friendshipDayPage').classList.remove('hidden');
-}
-
 function showDashboard() {
     hideAllPages();
     document.getElementById('dashboard').classList.remove('hidden');
@@ -472,8 +454,8 @@ function hideAllPages() {
 
 // ===== EVENT LISTENERS =====
 function initializeEventListeners() {
-    // Friendship Day enter button
-    document.getElementById('enterDashboard').addEventListener('click', showDashboard);
+    // New animation enter button
+    document.getElementById('letsGoBtn').addEventListener('click', showDashboard);
     
     // Dashboard card clicks
     document.getElementById('planCard').addEventListener('click', showPlanDatePage);
