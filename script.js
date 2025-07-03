@@ -340,14 +340,12 @@ let isGalleryUnlocked = false;
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', async function() {
+    showLoadingScreen();
+    
     // Initialize debug panel
     initializeDebugPanel();
     
     try {
-        // Show the animation page first
-        hideAllPages();
-        document.getElementById('customAnimationPage').classList.remove('hidden');
-
         // Wait a moment for Firebase to fully initialize
         await new Promise(resolve => setTimeout(resolve, 1000));
         
@@ -355,15 +353,17 @@ document.addEventListener('DOMContentLoaded', async function() {
         const firebaseConnected = await testFirebaseConnection();
         
         if (firebaseConnected) {
-            // Load data from Firebase in the background
+            // Load data from Firebase
             await loadFirebaseData();
+            
             // Set up real-time listeners for data changes
             setupRealTimeListeners();
         } else {
             console.warn("Falling back to local storage mode");
         }
         
-        // Initialize UI components that are not visible yet
+        // Initialize UI
+        checkFriendshipDay();
         initializeEventListeners();
         initializeDateDetailsModal();
         updateCountdownCard();
@@ -373,6 +373,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     } catch (error) {
         console.error("Initialization error:", error);
         showErrorMessage("Something went wrong! 💔 Please try refreshing the page.");
+    } finally {
+        hideLoadingScreen();
     }
 });
 
@@ -394,6 +396,22 @@ function showLoadingOverlay(message) {
 
 function hideLoadingOverlay() {
     document.getElementById('loadingOverlay').classList.add('hidden');
+}
+
+function checkFriendshipDay() {
+    const today = new Date();
+    const isJuly3rd = today.getMonth() === 6 && today.getDate() === 3; // July is month 6 (0-indexed)
+    
+    if (isJuly3rd) {
+        showFriendshipDayPage();
+    } else {
+        showDashboard();
+    }
+}
+
+function showFriendshipDayPage() {
+    hideAllPages();
+    document.getElementById('friendshipDayPage').classList.remove('hidden');
 }
 
 function showDashboard() {
@@ -424,34 +442,7 @@ function hideAllPages() {
 // ===== EVENT LISTENERS =====
 function initializeEventListeners() {
     // New animation enter button
-    // Note: Let's Go button is handled by the dedicated setup function above
-    // to ensure it works regardless of initialization issues
-    
-    /*
-    // Enhanced "Let's Go" button with smooth transition
-    document.getElementById('letsGoBtn').addEventListener('click', function() {
-        // Add click animation to button
-        this.style.transform = 'scale(0.95)';
-        this.style.transition = 'transform 0.1s ease';
-        
-        setTimeout(() => {
-            this.style.transform = '';
-            // Add fade out to homepage
-            document.getElementById('customAnimationPage').style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            document.getElementById('customAnimationPage').style.opacity = '0';
-            document.getElementById('customAnimationPage').style.transform = 'scale(0.95)';
-            
-            setTimeout(() => {
-                showDashboard();
-                // Reset homepage for next time
-                setTimeout(() => {
-                    document.getElementById('customAnimationPage').style.opacity = '';
-                    document.getElementById('customAnimationPage').style.transform = '';
-                }, 100);
-            }, 300);
-        }, 100);
-    });
-    */
+    document.getElementById('letsGoBtn').addEventListener('click', showDashboard);
     
     // Dashboard card clicks
     document.getElementById('planCard').addEventListener('click', showPlanDatePage);
